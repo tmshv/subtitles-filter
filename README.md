@@ -16,4 +16,5 @@ go build ./cmd/subfilter
 
 ```sh
 ./subfilter /path/to/webvtt-file.vtt >> clean.vtt
-``````
+```
+
