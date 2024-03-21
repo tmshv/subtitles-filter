@@ -19,7 +19,7 @@ var filter f.Filter = f.All(
 func run() error {
 	var sub *vtt.VTT
 	var err error
-	if len(os.Args) < 1 {
+	if len(os.Args) <= 1 {
 		sub, err = vtt.Scan(os.Stdin)
 	} else {
 		var filename string = os.Args[1]
