@@ -16,17 +16,24 @@ var filter f.Filter = f.All(
 	)),
 )
 
-func run(filename string) error {
-	s, err := vtt.OpenFile(filename)
+func run() error {
+	var sub *vtt.VTT
+	var err error
+	if len(os.Args) < 1 {
+		sub, err = vtt.Scan(os.Stdin)
+	} else {
+		var filename string = os.Args[1]
+		sub, err = vtt.OpenFile(filename)
+	}
 	if err != nil {
 		return err
 	}
 
 	// Write head
-	fmt.Printf("%s\n\n", s.Head())
+	fmt.Printf("%s\n\n", sub.Head())
 
 	// Write filterd records
-	for rec := range s.Iter() {
+	for rec := range sub.Iter() {
 		if filter.Test(rec.Text()) {
 			fmt.Printf("%s\n%s\n\n", rec.Time(), rec.Text())
 		}
@@ -36,12 +43,7 @@ func run(filename string) error {
 }
 
 func main() {
-	if len(os.Args) < 1 {
-		panic("no filename")
-	}
-	var filename string = os.Args[1]
-	err := run(filename)
-	if err != nil {
+    if err := run(); err != nil {
 		panic(err)
 	}
 }

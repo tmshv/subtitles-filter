@@ -2,6 +2,7 @@ package vtt
 
 import (
 	"bufio"
+	"io"
 	"os"
 	"strings"
 )
@@ -48,7 +49,11 @@ func OpenFile(filename string) (*VTT, error) {
 	if err != nil {
 		return nil, err
 	}
-	scanner := bufio.NewScanner(file)
+    return Scan(file)
+}
+
+func Scan(buffer  io.Reader) (*VTT, error) {
+	scanner := bufio.NewScanner(buffer)
 
 	// Get head
 	if !scanner.Scan() {
