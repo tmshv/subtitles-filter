@@ -9,6 +9,7 @@ import (
 )
 
 var filter f.Filter = f.All(
+	f.Prev(),
 	f.MinLen(2),
 	f.Not(f.Any(
 		f.Eq("."),
