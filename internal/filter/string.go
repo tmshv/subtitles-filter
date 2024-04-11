@@ -10,11 +10,11 @@ type minlen struct {
 }
 
 func (f *minlen) Test(text string) bool {
-    return utf8.RuneCountInString(text) >= f.val
+	return utf8.RuneCountInString(text) >= f.val
 }
 
 func MinLen(val int) Filter {
-    return &minlen{val}
+	return &minlen{val}
 }
 
 type substr struct {
@@ -26,6 +26,5 @@ func (f *substr) Test(text string) bool {
 }
 
 func Substr(val string) Filter {
-    return &substr{val}
+	return &substr{val}
 }
-
